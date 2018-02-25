@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			<td><a class='text-info' href=#> Edit User Information </a></td>
 		</tr>	
 		<tr>
-			<td><a class='text-info' href=#> Request Help </a></td>
+			<td><a class='text-info' href='help.php'> Request Help </a></td>
 			<td><a class='text-info' href="dashboard.php?type=none"> Deactivate Account </a></td>
 		</tr>
 		<tr>	

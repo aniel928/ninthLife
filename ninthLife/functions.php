@@ -93,10 +93,28 @@ function createAccount($name, $displayName, $phone, $address, $zip, $email, $pas
 		}
 		$query = "INSERT INTO `Users` (`password`, `email`, `phone`, `streetAddress`, `zipCode`, `fullName`, `displayName`, `rating`, `angel`, `owner`) VALUES (\"".$password."\", \"". $email ."\", \"". $phone . "\", \"". $address. "\", \"". $zip ."\", \"" . $name . "\", \"" . $displayName . "\", 0, " . $angel . ", " . $owner . ");";
 		
-		mysql_query($query);
-		mysql_close($connection);
+		mysqli_query($query);
+		mysqli_close($connection);
 		login($email,$password);	
 	}//end first else
 }
 
+function getPets($userId){
+	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
+	
+	$pets = [];
+	$sql = "SELECT * FROM Pets, Users WHERE `Pets`.`petOwner` = `Users`.`userId` AND petOwner=\"".$userId."\";";
+	$result = $connection->query($sql);
+	if ($result->num_rows > 0) {
+    	// output data of each row
+    	while($row = $result->fetch_assoc()) {
+        	array_push($pets, $row);
+    	}
+	} else {
+	    $pets = null;
+
+	}
+	$connection->close();
+	return $pets;
+}
 ?>

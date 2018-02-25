@@ -49,10 +49,10 @@ else{
 		<!-- Pet Type -->
 		<label for="petType">Pet Type:</label>
 		<select required name="petType" id='petType'>
-			<option value='cat'>Cat</option>
-			<option value='dog'>Dog</option>
-			<option value='bird'>Bird</option>
-			<option value='other'>Other</option>
+			<option value='Cat'>Cat</option>
+			<option value='Dog'>Dog</option>
+			<option value='Bird'>Bird</option>
+			<option value='Other'>Other</option>
 		</select>
 	</div>				
 	<div class="form-group">
