@@ -1,8 +1,10 @@
 <?php 
 $title = "Ninth Life - Register";
+
 include("header.php"); 
 include("functions.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
 	$name = $displayName = $phone = $address = $zip = $email = $password = $type = "";
 
    	if(isset($_POST['name'])){
@@ -56,40 +58,39 @@ else{
 			}
 		?>
 
-
 		<form action="register.php" method="post">
 			<div class="form-group">
 				<!-- Full Name -->
 				<label for="full name">Full Name:</label>
-				<input required type="text" class="form-control" id="name" name = "name" aria-describedby="nameHelp" placeholder="Full name" onblur="fillDisplay()">
+				<input required type="text" class="form-control" id="name" name = "name" aria-describedby="nameHelp" placeholder="e.g. John Smith" onblur="fillDisplay()">
 				<small id="nameHelp" class="form-text text-muted">Please enter your full name. You can enter a display name below.</small>
 			</div>
 			<div class="form-group">
 				<!-- Display Name -->
 				<label for="displayname">Display Name:</label>
-				<input type="text" class="form-control" id="displayname" name = "displayname" aria-describedby="displaynamehelp" placeholder="Display name">
+				<input type="text" class="form-control" id="displayname" name = "displayname" aria-describedby="displaynamehelp" placeholder="e.g. Johnny S.">
 				<small id="displaynamehelp" class="form-text text-muted">This is the name that other users will see.</small>
 			</div>				
 			<div class="form-group">
 				<!-- Email Address -->
 				<label for="phone">Phone Number</label>
-				<input required type="tel" class="form-control" id="phone" name = "phone" aria-describedby="phoneHelp" placeholder="Enter phone">	
+				<input required type="tel" class="form-control" id="phone" name = "phone" aria-describedby="phoneHelp" placeholder="e.g. 555-555-5555">
 				<small id="phoneHelp" class="form-text text-muted">We'll only share your phone number with those who have offered to foster your pet.</small>
 			</div>
 			<div class="form-group">
 				<!-- Home Address -->
-				<label for="address">Street address</label>
-				<input required type="text" class="form-control" id="address" name = "address" aria-describedby="addressHelp" placeholder="Enter address">
+				<label for="address">Full address</label>
+				<input required type="text" class="form-control" id="address" name = "address" aria-describedby="addressHelp" placeholder="e.g. 123 Main St, Maintown, NJ">
 				<br>
 				<!-- Zip Code -->
 				<label for="zip">Zip Code</label>
-				<input required type="zip" class="form-control" id="zip" name = "zip" aria-describedby="zipHelp" placeholder="00000">
+				<input required type="zip" class="form-control" id="zip" name = "zip" aria-describedby="zipHelp" placeholder="e.g. 90210">
 				<small id="zipHelp" class="form-text text-muted">We'll never share your home address, this is merely to help with map placement.</small>
 			</div>
 			<div class="form-group">
 				<!-- Email Address -->
 				<label for="email">Email address</label>
-				<input required type="email" class="form-control" id="email" name = "email" aria-describedby="emailHelp" placeholder="Enter email">
+				<input required type="email" class="form-control" id="email" name = "email" aria-describedby="emailHelp" placeholder="e.g. me@example.com">
 				<small id="emailHelp" class="form-text text-muted">We'll only share your email with those who have offered to foster your pet.</small>
 			</div>
 			<div class="form-group">

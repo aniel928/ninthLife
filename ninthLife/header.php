@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title> <?php echo $title ?></title>
+
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
   </head>
 	<body class='bg-light'>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,7 +39,15 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" target='_blank' href=#>Stuff</a>
                 <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="index.php">Log In</a>
+                <?php 
+                  if($title == "Ninth Life - Register" || $title == "Ninth Life - Log In"){
+                    echo '<a class="dropdown-item" href="index.php">Log In</a>';
+                  }
+                  else{
+                    echo '<a class="dropdown-item" href="index.php">Log Out</a>';  
+                  }
+                ?>
+                  
               </div>
             </li>
         </ul>

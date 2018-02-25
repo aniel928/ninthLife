@@ -1,6 +1,8 @@
 <?php 
 $title = "Ninth Life - Log In";
 include("header.php"); 
+session_start();
+session_destroy();
 ?>
 
 <div class='row'>
