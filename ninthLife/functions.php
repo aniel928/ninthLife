@@ -152,7 +152,7 @@ function flagHelped($petId, $status){
 
 function updateFostered($petId, $ownerId, $userId){
 	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
-	$connection->query("INSERT INTO Fostering (angelId, ownerId, petHelped, location) VALUES (".$userId.", ".$ownerId.", ". $petId .", 0);");
+	$connection->query("INSERT INTO Fostering (angelId, ownerId, petHelped, location) VALUES (".$userId.", ".$ownerId.", ". $petId .", 1);");
 	$connection->close();
 }
 
@@ -206,13 +206,38 @@ function updateUser($userId, $fullName, $displayName, $phone, $address, $zip, $e
 	
 }
 
-// function getFosteredPets($userID){
-// 	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
-// 	$connection->query("SELECT * From Fostering, Users, Pets WHERE Fostering.ownerId = Pets.petOwner AND Pets.petOwner = Users.userId;");
-// 	$connection->close();
-// }
+function getFosteredPets($userID){
+	$pets = [];
+	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
+	$result = $connection->query("SELECT * From Fostering where location > 0 and ownerId=\"".$userID."\";");
 
-// function getFosteringPets($userID){
+	if ($result->num_rows > 0) {
+    	// output data of each row
+    	while($row = $result->fetch_assoc()) {
+        	array_push($pets, $row);
+    	}
+	} else {
+	    $pets = null;
+	}
+	$connection->close();
+	return $pets;
+}
+function getFosteringPets($userID){
+	$pets = [];
+	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
+	$sql = "SELECT * From Fostering where location > 0 and angelId=\"" . $userID . "\";";
+	$result = $connection->query($sql);
 
-// }
+	if($result->num_rows > 0){
+		// output data of each row
+    	while($row = $result->fetch_assoc()) {
+
+        	array_push($pets, $row);
+    	}
+	} else {
+	    $pets = null;
+	}
+	$connection->close();
+	return $pets;
+}
 ?>
