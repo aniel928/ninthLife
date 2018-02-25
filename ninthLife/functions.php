@@ -4,24 +4,16 @@
 //call this function to log a user in - need to add hash for password
 function login($email,$password){
 	//start session
-	session_start();
+	
 	//connect to db
-	$connection = mysqli_connect("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
-	//takes input values and makes them safe
-	$email = stripslashes($email);
-	$password = stripslashes($password);
-	$email = mysqli_real_escape_string($connection, $email);
-	$password = mysqli_real_escape_string($connection, $password);
+	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
 	
-	//choose db
-	$db = mysqli_select_db($connection, "ninth_life");
 	//set up and execute query, then put into array, then check for # of rows
-	$query = mysqli_query($connection, "select * from `Users` where password=\"". $password. "\" AND email= \"" . $email . "\";");
-	$rows = mysqli_num_rows($query);
-	
+	$result = $connection->query("select * from `Users` where password=\"". $password. "\" AND email= \"" . $email . "\";");
 	//assign all session variables if valid login
-	if ($rows > 0) {
-		$row = mysqli_fetch_assoc($query);
+	if ($result->num_rows > 0) {
+		$row = $result->fetch_assoc();
+		session_start();
 		//set session variables
 		$_SESSION['user_id']=$row['userId'];
 		$_SESSION['email'] = $row['email'];
@@ -47,14 +39,15 @@ function login($email,$password){
 
 		if(!isset($login_session)){
 			mysqli_close($connection); // Closing Connection
-//			header('Location: index.php?status=failed'); // Redirecting To Home Page
+			header('Location: index.php?status=failed'); // Redirecting To Home Page
 		}//end if(!isset($login_session)
 		mysqli_close($connection); // Closing Connection
-//		header("location: dashboard.php"); // Redirecting To Other Page
+		
+		
 	}//end if ($rows == 1)
  	else {//if rows !=1
 	 	mysqli_close($connection); // Closing Connection
-//		header("location: index.php?status=failed");
+		header("location: index.php?status=failed");
 	}//end else
 }//end function
 
@@ -62,24 +55,15 @@ function login($email,$password){
 //call this function to create a new account
 function createAccount($name, $displayName, $phone, $address, $zip, $email, $password, $type){
 	//connect and select db
-	echo "yes";
-	$connection = mysqli_connect("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife");
-	$db = mysqli_select_db("ninth_life", $connection);
+	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife");
 	//make sure account doesn't already exist
-	$query = mysqli_query("select * from `Users` where password='$password' AND email='$email'",$connection);
-	$rows = mysqli_num_rows($query);
-	if($rows >= 1){ //if email, password are the same
-		echo "no";
-		mysqli_close($connection);
+	$connection->query("select * from `Users` where password='$password' AND email='$email'");
+	$result = $connection->query($sql);
+	if($result->num_rows >= 1){ //if email, password are the same
+		$connection->close();
 		header("location:register.php?status=failed");
 	}//end if($rows >=1)
 	else{//if it does not exist, check email and type (in case pw is wrong)
-		echo "yay";
-		
-		$email = stripslashes($email);
-		$password = stripslashes($password);
-		$email = mysql_real_escape_string($email);
-		$password = mysql_real_escape_string($password);
 
 		$angel = 0;
 		$owner = 0;
@@ -91,10 +75,11 @@ function createAccount($name, $displayName, $phone, $address, $zip, $email, $pas
 			$angel = 0;
 			$owner = 1;
 		}
-		$query = "INSERT INTO `Users` (`password`, `email`, `phone`, `streetAddress`, `zipCode`, `fullName`, `displayName`, `rating`, `angel`, `owner`) VALUES (\"".$password."\", \"". $email ."\", \"". $phone . "\", \"". $address. "\", \"". $zip ."\", \"" . $name . "\", \"" . $displayName . "\", 0, " . $angel . ", " . $owner . ");";
-		
-		mysqli_query($query);
-		mysqli_close($connection);
+
+		$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
+		$connection->query("INSERT INTO `Users` (`password`, `email`, `phone`, `streetAddress`, `zipCode`, `fullName`, `displayName`, `rating`, `angel`, `owner`) VALUES (\"".$password."\", \"". $email ."\", \"". $phone . "\", \"". $address. "\", \"". $zip ."\", \"" . $name . "\", \"" . $displayName . "\", 0, " . $angel . ", " . $owner . ");");
+		$connection->close();
+
 		login($email,$password);	
 	}//end first else
 }
@@ -139,7 +124,7 @@ function getPetInfo($petId){
 function getPetsInNeed($zip){
 	$string = "";
 	if($zip != null){
-		$string = "AND zipCode = " . $zip;
+		$string = " AND zipCode = " . $zip;
 	}
 	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
 	
@@ -206,4 +191,28 @@ function map_google_search_result($geo)
     ];
     return $result;
 }
+
+function updateUser($userId, $fullName, $displayName, $phone, $address, $zip, $email){
+	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
+	$connection->query("UPDATE Users Set `fullName`=\"".$fullName."\", `displayName`=\"".$displayName."\", `phone`=\"".$phone."\", `streetAddress` = \"".$address."\", `zipCode`=\"".$zip."\", `email`=\"".$email."\" where `userId`=\"".$userId."\";");
+	$connection->close();
+
+	$_SESSION['email'] = $email;
+	$_SESSION['phone'] = $phone;
+	$_SESSION['address'] = $address;
+	$_SESSION['zip'] = $zip;
+	$_SESSION['name'] = $fullName;
+	$_SESSION['displayName'] = $displayName;
+	
+}
+
+// function getFosteredPets($userID){
+// 	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
+// 	$connection->query("SELECT * From Fostering, Users, Pets WHERE Fostering.ownerId = Pets.petOwner AND Pets.petOwner = Users.userId;");
+// 	$connection->close();
+// }
+
+// function getFosteringPets($userID){
+
+// }
 ?>

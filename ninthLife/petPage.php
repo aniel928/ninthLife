@@ -11,7 +11,7 @@ $displayName = $_SESSION['displayName'];
 $type = $_SESSION['type'];
 $rating = $_SESSION['rating'];
 $username = $_SESSION['login_user'];
-$title = "Ninth Life - Dashboard" ;
+$title = "Ninth Life - Pet Page" ;
 include('header.php');
 include('functions.php');
 
@@ -123,3 +123,4 @@ $lng = $mapData['lng'];
       </div>
 
     </div>
+    <?php include("footer.php"); ?>

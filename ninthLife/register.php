@@ -112,7 +112,7 @@ else{
 					Angel (I want to help foster pets)
 				</label><br>	
 				<label class="radio-inline 	">
-					<input required type="radio" id="type" name = "type" aria-describedby="typeHelp" value="angel">
+					<input required type="radio" id="type" name = "type" aria-describedby="typeHelp" value="owner">
 					Pet Owner (My pets need help!)
 				</label><br>	
 				<small id="emailHelp" class="form-text text-muted">You can change this later.</small>

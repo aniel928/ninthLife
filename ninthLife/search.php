@@ -1,5 +1,5 @@
 <?php
-	$title = "Ninth Life - Help!";
+	$title = "Ninth Life - Search";
 	include('header.php');
 	include('functions.php');
 
@@ -22,9 +22,14 @@
 	}
 ?>
 <div class='container bg-white'>
-<table class='table'>
-	<tr><th>Picture</th><th>Pet Type</th><th>Pet Name</th><th>Zip Code</th><th> Profile </th></tr>
+<table class='table mx-auto text-center'>
+	
 <?php
+	if($pets == null){
+	echo "<tr><th>No pets in need right now.  Great job everyone!</th></tr></table>";
+	}
+	else{
+		echo "<tr><th>Picture</th><th>Pet Type</th><th>Pet Name</th><th>Zip Code</th><th> Profile </th></tr>";
 	foreach($pets as $pet){
 		echo "<tr>";
 		echo "<td><img style='width:150px' src=\"".$pet["pictureLink"]."\"></td>";
@@ -33,17 +38,17 @@
 		echo "<td>".$pet["zipCode"]."</td>";
 		echo "<td><a href=\"petPage.php?id=".$pet["petId"]."\"><button class = 'btn btn-success'>See My Profile!</button></a></td>";
 		echo "</tr>";
-	}
+	}}
 ?>
 </table>
 </div>
 <div class='mx-auto text-center'>
 <?php
 if(isset($_GET['search'])){
-		echo '<p> Showing results in all areas.  To see only your zip code, click <a href="search.php">here</a>.</p>';
+		echo '<p> Showing all results.  To see results in only your area, click <a href="search.php">here</a>.</p>';
 	}
 	else{
-		echo '<p> Only showing results in your area.  To search all results, click <a href="search.php?search=all">here</a>.</p>';
+		echo '<p> Showing all nearby results.  To search all results, click <a href="search.php?search=all">here</a>.</p>';
 	}
 ?>
 

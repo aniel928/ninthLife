@@ -1,4 +1,5 @@
 <?php
+	$title = "Ninth Life - New Pet";
 	include("header.php");
 	include("functions.php");
 	
@@ -64,7 +65,7 @@ else{
 		<label for="info">Information</label>
 		<textarea rows="4" maxlength="800" class="form-control" id="info" name = "info" placeholder="e.g. Friendly golden retriever, 85 lbs of pure love.  Does not do well with other dogs, but loves cats!"></textarea>
 	</div>
-	<button required type="submit" class="btn btn-primary">Register</button>
+	<button required type="submit" class="btn btn-primary">Add Pet</button>
 </form>
 
 

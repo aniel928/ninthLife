@@ -6,7 +6,7 @@ include('functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	session_start();
-	if(!isset($_SESSION['userID'])){
+	if(!isset($_SESSION['user_id'])){
 		header("location:index.php");
 	}
 	$userID = $_SESSION['user_id'];
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<table class='table text-center'>
 		<tr>
 			<td><a class='text-info' href='newPet.php'> Add a Pet </a></td>
-			<td><a class='text-info' href='#'> Edit User Information </a></td>
+			<td><a class='text-info' href='edit.php'> Edit User Information </a></td>
 		</tr>	
 		<tr>
 			<td><a class='text-info' href='help.php'> Request Help </a></td>
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<table class='table text-center'>
 		<tr>
 			<td><a class='text-info' href='search.php'> Search for a pet to foster</a></td>
-			<td><a class='text-info' href=#> Edit User Information </a></td>
+			<td><a class='text-info' href='edit.php'> Edit User Information </a></td>
 		</tr>	
 		<tr>
 			<td></td>
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class='container-fluid mx-auto my-5 border border-secondary bg-white'>
 	<table class='table text-center'>
 		<tr>
-			<td><a class='text-info' href=#> Edit User Information </a></td>
+			<td><a class='text-info' href='edit.php'> Edit User Information </a></td>
 		</tr>
 		<tr>
 			<td><a class='text-info' href="dashboard.php?type=angel"> Reactivate Account as Angel </a></td>

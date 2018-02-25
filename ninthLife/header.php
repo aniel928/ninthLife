@@ -38,7 +38,7 @@
               <a class="nav-link dropdown-toggle" href=# id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="dashboard.php">Dashboard</a>
-                  <a class="dropdown-item" href="#">Edit Profile</a>
+                  <a class="dropdown-item" href="edit.php">Edit Profile</a>
                 <div class="dropdown-divider"></div>
                 <?php 
                   if($title == "Ninth Life - Register" || $title == "Ninth Life - Log In"){

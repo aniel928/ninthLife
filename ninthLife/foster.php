@@ -12,7 +12,7 @@ $type = $_SESSION['type'];
 $rating = $_SESSION['rating'];
 $username = $_SESSION['login_user'];
 
-$title = "Ninth Life - Dashboard" ;
+$title = "Ninth Life - Foster";
 include('header.php');
 include('functions.php');
 
@@ -39,3 +39,4 @@ flagHelped($petId, 0);
     </div>
   </div>
 </div>
+<?php include("footer.php"); ?>
