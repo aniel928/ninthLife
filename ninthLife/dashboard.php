@@ -6,19 +6,22 @@ include('functions.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	session_start();
+	if(!isset($_SESSION['userID'])){
+		header("location:index.php");
+	}
 	$userID = $_SESSION['user_id'];
 	if(isset($_GET['type'])){
 		$type = $_GET['type'];
 		$_SESSION['type'] = $type;
-		$owner = false;
-		$angel = false;
-		if($_SESSION['type'] == "owner"){
-			$owner = true;
-		}else if($_SESSION['type'] == "angel"){
-			$angel = true;
+		$owner = 0;
+		$angel = 0;
+		if($type == "owner"){
+			$owner = 1;
+		}else if($type == "angel"){
+			$angel = 1;
 		}
 		$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
-		$connection->query("UPDATE Users SET owner = ". $owner . ", angel = ". $angel ." WHERE userId=". $userID .");");
+		$connection->query("UPDATE Users SET `owner` = ". $owner . ", `angel` = ". $angel ." WHERE userId=\"". $userID ."\";");
 
 		$connection->close();
 	}
@@ -63,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<table class='table text-center'>
 		<tr>
 			<td><a class='text-info' href='newPet.php'> Add a Pet </a></td>
-			<td><a class='text-info' href=#> Edit User Information </a></td>
+			<td><a class='text-info' href='#'> Edit User Information </a></td>
 		</tr>	
 		<tr>
 			<td><a class='text-info' href='help.php'> Request Help </a></td>
@@ -85,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class='container-fluid mx-auto my-5 border border-secondary bg-white'>
 	<table class='table text-center'>
 		<tr>
-			<td><a class='text-info' href=#> Search for a pet to foster</a></td>
+			<td><a class='text-info' href='search.php'> Search for a pet to foster</a></td>
 			<td><a class='text-info' href=#> Edit User Information </a></td>
 		</tr>	
 		<tr>

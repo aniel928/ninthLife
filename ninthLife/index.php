@@ -6,10 +6,11 @@ session_destroy();
 ?>
 
 <div class='row'>
-	<div class = 'col-md-6'>
+	<div class = 'col-xl-6'>
 		<img style='width: 500px' class="img-responsive" src="img/catdog.jpeg"/>
+		<br><br>
 	</div>
-	<div class = 'col-md-6'>
+	<div class = 'col-xl-6'>
 		<h1> Welcome to Ninth Life! </h1>
 		<br>
 		<h4> Please Log In </h4>

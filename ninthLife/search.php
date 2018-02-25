@@ -14,14 +14,12 @@
     $type = $_SESSION['type'];
     $rating = $_SESSION['rating'];
     $username = $_SESSION['login_user'];
-
-if(isset($_GET['id'])) {
-	flagHelped($_GET['id'], 1);
-}
-
-
-
-	$pets = getPets($userID);
+    if(isset($_GET['search'])){
+		$pets = getPetsInNeed(null);
+	}
+	else{
+		$pets = getPetsInNeed($zip);
+	}
 ?>
 <div class='container bg-white'>
 <table class='table'>
@@ -33,18 +31,24 @@ if(isset($_GET['id'])) {
 		echo "<td>".$pet["type"]."</td>";
 		echo "<td>".$pet["name"]."</td>";
 		echo "<td>".$pet["zipCode"]."</td>";
-		if($pet["needsHelp"] == 0){
-			echo "<td><a href=\"help.php?id=".$pet["petId"]."\"><button class = 'btn btn-success'>Request An Angel</button></a></td>";	
-		}
-		else{
-			echo "<td><a href=\"help.php?id=".$pet["petId"]."\"><button disabled class = 'btn btn-success'>Request An Angel</button></a></td>";
-		}
+		echo "<td><a href=\"petPage.php?id=".$pet["petId"]."\"><button class = 'btn btn-success'>See My Profile!</button></a></td>";
 		echo "</tr>";
 	}
 ?>
 </table>
 </div>
+<div class='mx-auto text-center'>
+<?php
+if(isset($_GET['search'])){
+		echo '<p> Showing results in all areas.  To see only your zip code, click <a href="search.php">here</a>.</p>';
+	}
+	else{
+		echo '<p> Only showing results in your area.  To search all results, click <a href="search.php?search=all">here</a>.</p>';
+	}
+?>
 
+
+</div>
 
 
 <?php
