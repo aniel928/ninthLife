@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		</tr>
 		<tr>	
 			<td><a class='text-info' href="dashboard.php?type=angel"> Switch to "Angel" Account </a></td>
-			<td><a class='text-info' href="history.php"> History</a></td>
+			<td><a class='text-info' href="history.php"> Open Fosters </a></td>
 		</tr>
 	</table>
 		</div>
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		</tr>
 		<tr>	
 			<td><a class='text-info' href="dashboard.php?type=owner"> Switch to "Owner" Account </a></td>
-			<td><a class='text-info' href="history.php"> History</a></td>
+			<td><a class='text-info' href="history.php"> Open Fosters </a></td>
 		</tr>
 	</table>
 		</div>

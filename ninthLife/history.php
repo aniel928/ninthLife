@@ -32,10 +32,11 @@ if(isset($_GET['cancel'])){
 	$connection = new mysqli("ninthlife.czilv4k1yhiv.us-east-2.rds.amazonaws.com", "admin", "ninthlife", "ninth_life");
 	if($type == 'owner'){
 		$connection->query("Update Fostering set location = 0 where petHelped=".$_GET['cancel']." AND ownerId=".$userID.";");
-		$connection->query("Update Pets set needsHelp = 1 where petId=".$_GET['cancel']);
+		
 	}
 	else{
 		$connection->query("Update Fostering set location = 0 where petHelped=".$_GET['cancel']." AND angelId=".$userID.";");
+		$connection->query("Update Pets set needsHelp = 1 where petId=".$_GET['cancel']);
 	}
 
 	
